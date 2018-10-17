@@ -1,4 +1,7 @@
 import os
+import csv
+import re
+
 """
 Requirement #
 
@@ -94,14 +97,61 @@ def DisplayAllUsers(tableName):
             allUsers=allUsers+'\n'
             for column in allColumns:
                 allUsers = allUsers + column.ljust(10,' ')
-                #allUsers=allUsers+'\n'+'='*50
+                #allUsers=allUser+'\n'+'='*50
             
     print(allUsers)
     fileObj.close()
-    
+
+def DisplayAllUsersUsingCVS(tableName,deleteData):
+    fileExtension='txt'
+    fileName=tableName+'.'+fileExtension
+    with open(fileName) as fp:
+        csvreader = csv.DictReader(fp)
+        columns=csvreader.fieldnames
+        print(columns[0].rjust(5+len(columns[0]),' '),columns[1].rjust(5+len(columns[1])))
+        for row in csvreader:
+            print(row[columns[0]].ljust(15,' '),row[columns[1]].ljust(15,' '))
+
+
+
+            
+def DeleteToDo():
+    print ("Which Item Do You Want To Delete?")
+    DeleteItem = raw_input(">") #select a line number to delete
+    print ("Are You Sure You Want To Delete Number" + DeleteItem + "(y/n)")
+    DeleteItem=int(DeleteItem) 
+    VerifyDelete = str.lower(raw_input(">"))
+    if VerifyDelete == "y":
+        FILE = open('data.txt',"r") #open the file (tried w+ as well, entire file is deleted)
+        lines=[x.strip() for x in FILE if int(x[:x.index('.')])!=DeleteItem] #read all the lines first except the line which matches the line number to be deleted
+        FILE.close()
+        FILE = open('data.txt',"w")#open the file again
+        for x in lines:FILE.write(x+'\n')    #write the data to the file
+    else:
+        print ("Nothing Deleted")
+
+
+def SearchFileUsingRegEx(tableName):
+    #result=[re.findall(r'f\(\s*([^,]+)\s*,\s*([^,]+)\s*\)',line) 
+    #       for line in open('Sample.txt')]
+    #print(result)
+    #regex = re.compile("f\(\s*([^,]+)\s*,\s*([^,]+)\s*\)")
+    regex = re.compile("1000\w*[^,]*")
+    #regex=re.compile(r'1000\w^\s*[^#]*IgnoreRhosts\s')
+    with open("User.txt") as f:
+        for line in f:
+            result = regex.search(line)
+            if(result!=None):
+                print(result)
+                
+
+
+        
 def main():
     tableName=input('Enter table Name: ')
-    CheckAndCreateSchema(tableName)
-    DisplayAllUsers(tableName)
+    #CheckAndCreateSchema(tableName)
+    #DisplayAllUsers(tableName)
+    #DisplayAllUsersUsingCVS(tableName,'')
+    SearchFileUsingRegEx(tableName)
 
 main()
