@@ -132,11 +132,12 @@ def DeleteToDo():
 
 
 def SearchFileUsingRegEx(tableName):
+    dataToSearch=input('Provide data to search: ')
     #result=[re.findall(r'f\(\s*([^,]+)\s*,\s*([^,]+)\s*\)',line) 
     #       for line in open('Sample.txt')]
     #print(result)
     #regex = re.compile("f\(\s*([^,]+)\s*,\s*([^,]+)\s*\)")
-    regex = re.compile("1000\w*[^,]*")
+    regex = re.compile(r"1000\w*[^,]*")
     #regex=re.compile(r'1000\w^\s*[^#]*IgnoreRhosts\s')
     with open("User.txt") as f:
         for line in f:
