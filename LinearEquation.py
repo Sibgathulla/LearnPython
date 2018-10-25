@@ -15,7 +15,7 @@ def IsValidEquations(equation):
         return False
     
 def ExtractCoefficient(equation):
-    reObj=re.compile(r'\d+')
+    reObj=re.compile(r'-?\d+')
     coefficient=reObj.findall(equation)
     return coefficient
     #print(coefficient)
