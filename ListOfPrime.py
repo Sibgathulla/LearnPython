@@ -16,8 +16,13 @@ Time taken to find prime:  2641.140676498413  Sec
 """
 import time
 import threading
+import math
 
-def IsPrime(nmbr):
+def IsPrimeHalf(nmbr):
+    if(nmbr==1):
+        return False
+    if(nmbr==2):
+        return True
     if(nmbr%2==0):
         return False
     hlfNmbr=nmbr//2
@@ -25,6 +30,20 @@ def IsPrime(nmbr):
         if nmbr%cuntr==0:
             return False
     return True
+
+def IsPrime(nmbr):
+    if(nmbr==1):
+        return False
+    if(nmbr==2):
+        return True
+    if(nmbr%2==0):
+        return False
+    sqrtNum=int(math.sqrt(nmbr)+1)
+    for cuntr in range(3,sqrtNum,2):
+        if nmbr%cuntr==0:
+            return False
+    return True
+
 
 def ListOfPrimeNumberUsingThread(rnge): 
     startTime=time.time()
