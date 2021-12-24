@@ -57,14 +57,14 @@ def ListOfPrimeNumberUsingThread(rnge):
 
 
 def ListOfPrimeNumber(rnge):
-    #lsPrime=[]
+    lsPrime=[]
     startTime=time.time()
     for cuntr in range(1,rnge+1):
-        IsPrime(cuntr)
-        #if(IsPrime(cuntr)):
-            #lsPrime.append(cuntr)
+        #IsPrime(cuntr)
+        if(IsPrime(cuntr)):
+            lsPrime.append(cuntr)
     print('Time taken to find prime: ',time.time()-startTime,' Sec')
-    #print(lsPrime)
+    print(lsPrime)
 
 
 
